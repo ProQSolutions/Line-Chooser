@@ -1,0 +1,79 @@
+<!DOCTPYE html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<style>
+body {
+  background: #000;
+}
+span {
+  color: #aaa;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 2vw;
+}
+
+#container {
+  display:block;
+  width:100%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  
+  height: 96vh;
+  
+}
+
+#container.left span, #container.right span {
+  opacity: 0;
+}
+
+#container:before {
+  content: ' ';
+  color:#fff;
+  display:block;
+  font: normal normal normal 50vw FontAwesome;
+  opacity: 0;
+  transition: 200ms opacity;
+}
+
+#container.left:before {
+  content: '\f060';
+  opacity: 1;
+}
+
+#container.right:before {
+  content: '\f061';
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+	<div id="container" class="">
+ 		<span>[ Tap ]</span>
+	</div>
+
+	<script type="text/javascript">
+		
+		var container = document.getElementById('container'),
+			timeoutID;
+
+		//Add event listener
+		document.body.addEventListener("click", function( event ) {
+
+			//Formula for determining optimum direction
+			//Based on years of TSA research
+			var left_or_right = Math.random() > .5 ? 'left' : 'right';
+			container.className = left_or_right;
+			
+			if(timeoutID)
+				clearTimeout(timeoutID);
+
+			//Hide arrow after 1.5 seconds
+			timeoutID = setTimeout(function() {
+				container.className = "";
+			},1500);
+		});
+
+	</script>
+</body>
